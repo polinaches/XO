@@ -1,9 +1,10 @@
 body {
-  background-color: rgb(254, 254, 255);
+  background-image: url(https://i.pinimg.com/736x/59/68/c8/5968c856c1d7606aac5abb6f2dab0fbc.jpg);
+  background-size: cover;
 }
 
 .game {
-  margin-top: 150px;
+  margin-top: 190px;
 }
 
 .board_row {
@@ -17,11 +18,34 @@ button {
   align-items: center;
   width: 100px;
   height: 100px;
+  background-color: rgb(255, 154, 221);
+  border: 2px solid rgb(217, 87, 130);
+  color: rgb(217, 87, 130);
+  border-radius: 10px;
+  font-size: 35px;
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
+button:hover {
+  scale: 1.02;
+}
+
+
 .status_game {
-  margin-top: -80px;
+  /* margin-left: 43.5%; */
+
   font-size: larger;
-  margin-left: 720px;
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-size: 35px;
+  font-style: normal;
+  color: rgb(217, 87, 130);
+
+  margin: auto;
+  margin-top: -7%;
+  width: 100%;
   position: absolute;
+  text-align: center;
 }

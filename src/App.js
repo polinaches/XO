@@ -4,14 +4,13 @@ import "./App.css"
 
 function Square({ value, OnSquareClick }) { // функция 1 квадратик, внутри значение + функция при нажатии на квадратик 
   return (
-    <button className="square" onClick={OnSquareClick} > {value}</button>
+    <button className="square" onClick={OnSquareClick}> {value}</button>
   )
 }
 
-export default function Board() {
-  const [XisNext, SetXisNext] = useState(true)
-  const [squares, Setsquares] = useState(Array(9).fill(null)) // создаем массив с 9 нулями - важно для опеределения победителя
-
+function Board({ XisNext, squares, onPlay }) {
+  // const [XisNext, SetXisNext] = useState(true)
+  // const [squares, Setsquares] = useState(Array(9).fill(null)) // создаем массив с 9 нулями - важно для опеределения победителя
   function HandleClick(i) {
     if ((squares[i]) || Winner(squares)) {
       // если уже что-то есть - скип и если уже победа - скип 
@@ -24,8 +23,7 @@ export default function Board() {
     else {
       NextSquares[i] = "O" // если нет то ну нет
     }
-    Setsquares(NextSquares) // обновляем массив 
-    SetXisNext(!XisNext) // обновляем очередность 
+    onPlay(NextSquares);
   }
   const winner = Winner(squares); // упрощаем
   let status;
@@ -55,6 +53,31 @@ export default function Board() {
       </div>
     </>)
 }
+
+export default function Game() {
+  const [XisNext, SetXisNext] = useState(true);
+  const [history, Sethistory] = useState([Array(9).fill(null)])
+  const CurrentSquares = history[history.length - 1]
+
+  function HandlePlay(NextSquares) {
+    Sethistory([...history, NextSquares]) // новый массив с "почленным" history + NextSquares
+    SetXisNext(!XisNext)
+  }
+
+
+  return ( // export default перенесли сюда, чтобы реализовать перемещания во времени (этот объект теперь главнее - у него вся инфа)
+    <div className="game">
+      <div className="game_board">
+        <Board XisNext={XisNext} squares={CurrentSquares} onPlay={HandlePlay} />
+      </div>
+      <div className="game_info">
+        <ol>
+          {/*топи топ */}
+        </ol>
+      </div>
+    </div>)
+}
+
 function Winner(squares) {
   const lines = [
     [0, 1, 2],
